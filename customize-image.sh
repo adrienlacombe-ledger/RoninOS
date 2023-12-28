@@ -128,9 +128,9 @@ _service_checks(){
 # Installs Nodejs, docker, docker-compose, and pm2. Clones the RoninDojo repo. This is needed due to some out dated packages in the default debian package manager.
 _prep_install(){
     # install Nodejs
+    local NODE_MAJOR=20
     apt-get install -y ca-certificates curl gnupg
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-    NODE_MAJOR=20
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
     apt-get update
     apt-get install -y nodejs
@@ -148,9 +148,6 @@ _prep_install(){
     # install docker-compose
     curl -L https://github.com/docker/compose/releases/download/v2.23.0/docker-compose-linux-aarch64 -o /usr/bin/docker-compose
     chmod +x /usr/bin/docker-compose
-
-    # install pm2 
-    npm install pm2 -g
 }
 
 _ronin_ui_avahi_service() {
@@ -200,9 +197,8 @@ _install_ronin_ui(){
 
     cd /home/ronindojo || exit
 
-    npm i -g pnpm &>/dev/null
-
-    #sudo npm install pm2 -g
+    npm i -g pnpm@7
+    npm i -g pm2
 
     test -d /home/ronindojo/Ronin-UI || mkdir /home/ronindojo/Ronin-UI
     cd /home/ronindojo/Ronin-UI || exit
