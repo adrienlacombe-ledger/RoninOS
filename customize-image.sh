@@ -146,7 +146,7 @@ _prep_install(){
     apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     # install docker-compose
-    curl -L https://github.com/docker/compose/releases/download/v2.23.0/docker-compose-linux-aarch64 -o /usr/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/v2.0.1/docker-compose-linux-aarch64 -o /usr/bin/docker-compose
     chmod +x /usr/bin/docker-compose
 }
 
@@ -197,8 +197,7 @@ _install_ronin_ui(){
 
     cd /home/ronindojo || exit
 
-    npm i -g pnpm@7
-    npm i -g pm2
+    npm i -g pnpm@7 pm2
 
     test -d /home/ronindojo/Ronin-UI || mkdir /home/ronindojo/Ronin-UI
     cd /home/ronindojo/Ronin-UI || exit
@@ -256,7 +255,7 @@ HiddenServicePort 80 127.0.0.1:8470\
 main(){
     # install dependencies
     apt-get update
-    apt-get install -y man-db git avahi-daemon nginx openjdk-11-jdk fail2ban net-tools htop unzip wget ufw rsync jq python3 python3-pip pipenv gdisk gcc curl apparmor ca-certificates gnupg lsb-release nvme-cli 
+    apt-get install -y man-db git avahi-daemon nginx openjdk-11-jdk fail2ban net-tools htop unzip wget ufw rsync jq python3 python3-pip pipenv gdisk gcc curl apparmor ca-certificates gnupg lsb-release
     apt-get install -y tor/bullseye-backports #install 0.4.7.x tor
     # clone the original RoninOS
     git clone https://code.samourai.io/ronindojo/RoninOS.git /tmp/RoninOS
