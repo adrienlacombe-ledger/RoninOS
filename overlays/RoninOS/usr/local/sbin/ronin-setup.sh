@@ -36,7 +36,7 @@ cd "$HOME" || exit
 sleep 75s 
 
 # Clone Repo
-git clone -b master https://code.samourai.io/ronindojo/RoninDojo /home/ronindojo/RoninDojo
+git clone -b feature/backup_includes_more https://code.samourai.io/ronindojo/RoninDojo /home/ronindojo/RoninDojo
 cd /home/ronindojo/RoninDojo
 
 # Source files
