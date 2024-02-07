@@ -249,7 +249,7 @@ HiddenServiceVersion 3\
 HiddenServicePort 80 127.0.0.1:8470\
 ' /etc/tor/torrc
 
-    cp -Rv /tmp/RoninOS/overlays/RoninOS/example.tor.service /usr/lib/systemd/system/tor.service
+    cp /tmp/RoninOS/overlays/RoninOS/example.tor.service /usr/lib/systemd/system/tor.service
     rm -rf /usr/lib/systemd/system/tor@* #remove unnecessary debian installed services
 }
 
