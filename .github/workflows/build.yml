@@ -43,7 +43,7 @@ jobs:
         run: mkdir -p build/userpatches/overlay/
 
       - name: copy Ronin resources
-        run: p -Rv RoninOS/customize-image.sh build/userpatches/customize-image.sh && cp -Rv RoninOS build/userpatches/overlay/
+        run: cp -Rv RoninOS/customize-image.sh build/userpatches/customize-image.sh && cp -Rv RoninOS build/userpatches/overlay/
 
       - name: build
         run: cd build && ./compile.sh BOARD=rockpro64 BRANCH=current BUILD_DESKTOP=no BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=bullseye
