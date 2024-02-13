@@ -32,21 +32,23 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ env.RONINOS_BRANCH }}
+          path: RoninOS
 
       - name: checkout Armbian build
         uses: actions/checkout@v4
         with:
           repository: 'armbian/build'
           ref: ${{ env.ARMBIAN_BRANCH }}
+          path: build
 
       - name: create overlay folder
-        run: mkdir -p build/userpatches/overlay/
+        run: mkdir -p ${{ github.workspace }}/build/userpatches/overlay/
 
       - name: copy Ronin resources
-        run: cp -Rv RoninOS/customize-image.sh build/userpatches/customize-image.sh && cp -Rv RoninOS build/userpatches/overlay/
+        run: cp -Rv ${{ github.workspace }}/RoninOS/customize-image.sh ${{ github.workspace }}/build/userpatches/customize-image.sh && cp -Rv ${{ github.workspace }}/RoninOS ${{ github.workspace }}/build/userpatches/overlay/
 
       - name: build
-        run: cd build && ./compile.sh BOARD=rockpro64 BRANCH=current BUILD_DESKTOP=no BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=bullseye
+        run: cd ${{ github.workspace }}/build && ./compile.sh BOARD=rockpro64 BRANCH=current BUILD_DESKTOP=no BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=bullseye
 
     
             
