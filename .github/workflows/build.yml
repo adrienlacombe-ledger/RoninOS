@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - main-adrien
       - develop
   pull_request:
   schedule:
@@ -14,7 +15,7 @@ on:
         description: 'branch of RoninOS to checkout'
         required: false
         type: string
-        default: 'main'
+        default: 'main-adrien'
       Armbian_branch:
         description: 'branch of Armbian to checkout'
         required: false
