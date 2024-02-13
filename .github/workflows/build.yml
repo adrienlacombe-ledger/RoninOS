@@ -2,6 +2,9 @@ name: Build RoninOS
 
 on:
   push:
+    branches:
+      - main
+      - develop
   pull_request:
   schedule:
     - cron: '0 11 * * *' # Runs daily at 11 (UTC)
