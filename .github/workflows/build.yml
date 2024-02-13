@@ -26,12 +26,27 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RONINOS_BRANCH: ${{ inputs.RoninOS_branch || '' }} # set here the values to use with cron job
+      ARMBIAN_BRANCH: ${{ inputs.Armbian_branch || '' }}
     steps:
       - name: checkout RoninOS
         uses: actions/checkout@v4
         with:
           ref: ${{ env.RONINOS_BRANCH }}
-      
-      - name: Rebuild Armbian
-        uses: armbian/build@v23.11.2
+
+      - name: checkout Armbian build
+        uses: actions/checkout@v4
+        with:
+          repository: 'https://github.com/armbian/build.git'
+          ref: ${{ env.ARMBIAN_BRANCH }}
+
+      - name: create overlay folder
+        run: mkdir -p build/userpatches/overlay/
+
+      - name: copy Ronin resources
+        run: p -Rv RoninOS/customize-image.sh build/userpatches/customize-image.sh && cp -Rv RoninOS build/userpatches/overlay/
+
+      - name: build
+        run: cd build && ./compile.sh BOARD=rockpro64 BRANCH=current BUILD_DESKTOP=no BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=bullseye
+
+    
             
