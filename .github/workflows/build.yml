@@ -1,0 +1,32 @@
+name: Build RoninOS
+
+on:
+  schedule:
+    - cron: '0 11 * * *' # Runs daily at 11 (UTC)
+  workflow_dispatch:
+    inputs:
+      RoninOS_branch:
+        description: 'branch of RoninOS to checkout'
+        required: false
+        type: string
+        default: 'main'
+      Armbian_branch:
+        description: 'branch of Armbian to checkout'
+        required: false
+        type: string
+        default: 'main'
+
+jobs:
+  build_RoninOS:
+    runs-on: ubuntu-latest
+    env:
+      RONINOS_BRANCH: ${{ inputs.RoninOS_branch || '' }} # set here the values to use with cron job
+    steps:
+      - name: checkout RoninOS
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RONINOS_BRANCH }}
+      
+      - name: Rebuild Armbian
+        uses: armbian/build@v23.11.2
+            
