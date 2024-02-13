@@ -1,6 +1,8 @@
 name: Build RoninOS
 
 on:
+  push:
+  pull_request:
   schedule:
     - cron: '0 11 * * *' # Runs daily at 11 (UTC)
   workflow_dispatch:
