@@ -36,7 +36,7 @@ jobs:
       - name: checkout Armbian build
         uses: actions/checkout@v4
         with:
-          repository: 'https://github.com/armbian/build.git'
+          repository: 'armbian/build'
           ref: ${{ env.ARMBIAN_BRANCH }}
 
       - name: create overlay folder
